@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+void log_in()
+
+{
+    system("cls");
+    int i;
+    char user_name[10],password[5];
+    printf("\t\t\t\t\t**********please log in first**********\n");
+    printf("\n\n\t\t\t\t\tUser Name:\n");
+    gets(user_name);
+    printf("\n\t\t\t\t\tPassword:\n");
+    gets(password);
+}
+
+void user_name()
+{
+    system("cls");
+    char x={'d','a','f','f','o','d','i','l'},y={'u','s','e','r'};
+
+}
+
+int main()
+{
+    log_in();
+}
