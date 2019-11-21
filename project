@@ -1,26 +1,37 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<conio.h>
+#define AdminName "mesbah"
+#define Password "12345"
 
-void log_in()
+void welcome();
+
+void main()
 
 {
-    system("cls");
-    int i;
-    char user_name[10],password[5];
-    printf("\t\t\t\t\t**********please log in first**********\n");
+    char user_name[10],pass[5];
+    printf("\t\t\t\t\t ---------------Welcome---------------\n");
+    printf("\n\t\t\t\t\t**********please log in first**********\n");
+again:
     printf("\n\n\t\t\t\t\tUser Name:\n");
     gets(user_name);
+
     printf("\n\t\t\t\t\tPassword:\n");
-    gets(password);
+    for(int i=0;i<5;i++){
+        char x=getch();
+        pass[i]=x;
+        printf("*");
+    }
+
+    if(strcmp(user_name,AdminName)==0 && strcmp(pass,Password)==0)
+        welcome();
+    else
+        goto again;
 }
 
-void user_name()
+welcome()
 {
     system("cls");
-    char x={'d','a','f','f','o','d','i','l'},y={'u','s','e','r'};
-
-}
-
-int main()
-{
-    log_in();
+    printf("\n\t\t\t\t\t\t\t\t\t\tYou are succefully login\n");
 }
