@@ -6,9 +6,9 @@
 #define Password "12345"
 
 void welcome();
-int login();
+void login();
 
-int main()
+void main()
 {
     printf("\t\t\t\t\t ---------------Welcome---------------\n");
     printf("\n\t\t\t\t\t**********please Log In First**********\n");
@@ -17,7 +17,7 @@ int main()
     login();
 }
 
-int login()
+login()
 {
     char user_name[10],pass[10];
     int count=0,stay=3;
