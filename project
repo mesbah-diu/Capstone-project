@@ -1,37 +1,68 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
 #include<conio.h>
-#define AdminName "mesbah"
+#include<stdlib.h>
+#define Admin "mesbah"
 #define Password "12345"
 
 void welcome();
+int login();
 
-void main()
-
+int main()
 {
-    char user_name[10],pass[5];
     printf("\t\t\t\t\t ---------------Welcome---------------\n");
-    printf("\n\t\t\t\t\t**********please log in first**********\n");
+    printf("\n\t\t\t\t\t**********please Log In First**********\n");
+    printf ("\n\t\t\t\t********************************************************");
+    printf ("\n\t\t\t\t********************************************************\n\n\n");
+    login();
+}
+
+int login()
+{
+    char user_name[10],pass[10];
+    int count=0,stay=3;
+
 again:
-    printf("\n\n\t\t\t\t\tUser Name:\n");
-    gets(user_name);
+    count++;
+    if(count==4)
+        exit(0);
+    stay--;
 
-    printf("\n\t\t\t\t\tPassword:\n");
-    for(int i=0;i<5;i++){
+    printf("\n\n\t\t\t\t\t\t\tUser Name:\n");
+    scanf("%s",&user_name);
+
+    printf("\n\t\t\t\t\t\t\tPassword:\n");
+    /*for(int i=0; i<5; i++)
+    {
         char x=getch();
-        pass[i]=x;
+       x= pass[i];
         printf("*");
-    }
+    }*/
+    scanf("%s",&pass);
 
-    if(strcmp(user_name,AdminName)==0 && strcmp(pass,Password)==0)
-        welcome();
+    if(strcmp(user_name,Admin)==0)
+    {
+        if(strcmp(pass,Password)==0)
+        {
+            welcome();
+        }
+        else
+        {
+            printf("\n\t\t\t\t\t\t   wrong password");
+            printf("\n\t\t\t\t\t\tYou have %d last chance\n",stay);
+            goto again;
+        }
+    }
     else
+    {
+        printf("\n\t\t\t\t\t\t  User doesn't exist");
+        printf("\n\t\t\t\t\t\tYou have %d last chance\n",stay);
         goto again;
+    }
 }
 
 welcome()
 {
     system("cls");
-    printf("\n\t\t\t\t\t\t\t\t\t\tYou are succefully login\n");
+    printf("\n\t\t\t\t\tYou are succefully login\n");
 }
