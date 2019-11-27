@@ -7,6 +7,10 @@
 
 void welcome();
 void login();
+void home();
+void new_entry();
+void marks_entry();
+void results();
 
 void main()
 {
@@ -64,5 +68,44 @@ again:
 welcome()
 {
     system("cls");
-    printf("\n\t\t\t\t\tYou are succefully login\n");
+    printf("\n\t\t\t\t\t\tYou are succefully login\n");
+    home();
 }
+
+home()
+{
+    int choice=0;
+    printf("\n\t\t\t\t\t\t What you want to do?\n");
+    printf("\n\t\t\t\t\t\t New Student Entry --> 1\n");
+    printf("\t\t\t\t\t\t Student Marks Entry --> 2\n");
+    printf("\t\t\t\t\t\t Check Result --> 3\n");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+    case 1:
+        new_entry();
+        break;
+    case 2:
+        marks_entry();
+        break;
+    case 3:
+        result();
+        break;
+    }
+}
+new_entry()
+{
+//    system(cls);
+    printf("Here you can add a new student\n");
+}
+marks_entry()
+{
+    //system(cls);
+    printf("Here you can add marks of a student\n");
+}
+result()
+{
+//    system(cls);
+    printf("Here you can check a student result\n");
+}
+
