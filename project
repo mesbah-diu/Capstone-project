@@ -6,11 +6,30 @@
 #define Password "12345"
 
 void welcome();
-void login();
+void admin_login();
+void student_login();
+void student_signup();
 void home();
-void new_entry();
 void marks_entry();
-void results();
+void result();
+
+typedef struct studentINFO
+{
+    char firstname[30];
+    char lastname[30];
+    char id[15];
+    char program[50];
+    char mail[20];
+    int contact;
+    char birthdateDate[30];
+    char presentAdd[60];
+    char permanentAdd[60];
+    char username[20];
+    char password[10];
+} student_info;
+
+//declaring file pointer
+FILE *stu_data, *student_result;
 
 void main()
 {
@@ -18,11 +37,32 @@ void main()
     printf("\n\t\t\t\t\t**********please Log In First**********\n");
     printf ("\n\t\t\t\t********************************************************");
     printf ("\n\t\t\t\t********************************************************\n\n\n");
-    login();
+again:
+    printf("\n\t\t\tAdmin Login press    1\n");
+    printf("\n\t\t\tStudent Login press  2\n");
+    printf("\n\t\t\tStudent Signup press 3\n");
+    int choice;
+    scanf("%d",&choice);
+    switch(choice)
+    {
+    case 1:
+        admin_login();
+        break;
+    case 2:
+        student_login();
+        break;
+    case 3:
+        student_signup();
+        break;
+    default:
+        printf("Wrong Keyword");
+        goto again;
+    }
 }
 
-login()
+admin_login()
 {
+    system("cls");
     char user_name[10],pass[10];
     int count=0,stay=3;
 
@@ -72,7 +112,7 @@ welcome()
     home();
 }
 
-home()
+/*home()
 {
     int choice=0;
     printf("\n\t\t\t\t\t\t What you want to do?\n");
@@ -92,20 +132,79 @@ home()
         result();
         break;
     }
-}
-new_entry()
-{
-//    system(cls);
-    printf("Here you can add a new student\n");
-}
+}*/
+
 marks_entry()
 {
-    //system(cls);
+    system("cls");
     printf("Here you can add marks of a student\n");
 }
-result()
+
+student_signup()
 {
-//    system(cls);
-    printf("Here you can check a student result\n");
+    system("cls");
+    int index, check=0;
+    char testUser[20], testPass[10], retype_pass[10];
+retry:
+    printf("\n\n\t\t\t\tFill all the information to register you...\n");
+    stu_data=fopen("signup.bin","ab");
+    if(stu_data==NULL)
+    {
+        printf("\n\t\t\tFile not found!!!\n");
+        exit(1);
+    }
+    getchar();
+    printf("\n\t\t\tFirst Name: ");
+    gets(student_info.firstname);
+    printf("\n\t\t\tLast Name: ");
+    gets(student_info.lastname);
+    printf("\n\t\t\tId No: ");
+    gets(student_info.id);
+    printf("\n\t\t\tProgram: ");
+    gets(student_info.program);
+    printf("\n\t\t\tUniversity Mail: ");
+    gets(student_info.mail);
+    printf("\n\t\t\tContact No: ");
+    scanf("%d",&student_info.contact);
+    getchar();
+    printf("\n\t\t\tBirthdate: ");
+    gets(student_info.birthdateDate);
+    printf("\n\t\t\tPresent Address: ");
+    gets(student_info.presentAdd);
+    printf("\n\t\t\tPermanent Address: ");
+    gets(student_info.permanentAdd);
+    printf("\n\t\t\tUsername: ");
+    gets(testUser);
+    while(fread(&student_info.username, sizeof(student_info.username), 1, stu_data)==1)
+    {
+        if(testUser==student_info.username)
+        {
+            check=1
+                  system("cls");
+            printf("\n\t\t\tUsername taken\n");
+            goto retry;
+        }
+        else
+            check=0;
+    }
+    if(check == 0)
+        strcpy(student_info.username,testUser);
+    printf("\n\t\t\tPassword(**Must be 10 charecter**): ");
+    scanf("%s",&testUser);
+    printf("\n\t\t\tRetype Password: ");
+    scanf("%s",&retype_pass);
+    if(strcmp(testPass, retype_pass)==0)
+    {
+        strcpy(strcpy(student_info.password, testPass));
+        fwrite(&student_info, sizeof(student_info), 1, stu_data);
+        fclose(stu_data);
+        //welcome(student_info.username);
+    }
+
 }
+student_login()
+{
+    printf("Student login");
+}
+
 
