@@ -13,22 +13,8 @@ void home();
 void marks_entry();
 void result();
 
-typedef struct studentINFO
-{
-    char firstname[30];
-    char lastname[30];
-    char id[15];
-    char program[50];
-    char mail[20];
-    int contact;
-    char birthdateDate[30];
-    char presentAdd[60];
-    char permanentAdd[60];
-    char username[20];
-    char password[10];
-} student_info;
 
-//declaring file pointer
+
 FILE *stu_data, *student_result;
 
 void main()
@@ -76,12 +62,6 @@ again:
     scanf("%s",&user_name);
 
     printf("\n\t\t\t\t\t\t\tPassword:\n");
-    /*for(int i=0; i<5; i++)
-    {
-        char x=getch();
-       x= pass[i];
-        printf("*");
-    }*/
     scanf("%s",&pass);
 
     if(strcmp(user_name,Admin)==0)
@@ -109,7 +89,7 @@ welcome()
 {
     system("cls");
     printf("\n\t\t\t\t\t\tYou are succefully login\n");
-    home();
+    //home();
 }
 
 /*home()
@@ -143,11 +123,27 @@ marks_entry()
 student_signup()
 {
     system("cls");
+    struct studentINFO
+    {
+        char firstname[30];
+        char lastname[30];
+        char id[15];
+        char program[50];
+        char mail[20];
+        int contact;
+        char birthdateDate[30];
+        char presentAdd[60];
+        char permanentAdd[60];
+        char username[20];
+        char password[10];
+    } student_info;
     int index, check=0;
     char testUser[20], testPass[10], retype_pass[10];
+
 retry:
     printf("\n\n\t\t\t\tFill all the information to register you...\n");
-    stu_data=fopen("signup.bin","ab");
+    stu_data=fopen("signup.bin","a");
+
     if(stu_data==NULL)
     {
         printf("\n\t\t\tFile not found!!!\n");
@@ -179,8 +175,8 @@ retry:
     {
         if(testUser==student_info.username)
         {
-            check=1
-                  system("cls");
+            check=1;
+            system("cls");
             printf("\n\t\t\tUsername taken\n");
             goto retry;
         }
@@ -195,16 +191,18 @@ retry:
     scanf("%s",&retype_pass);
     if(strcmp(testPass, retype_pass)==0)
     {
-        strcpy(strcpy(student_info.password, testPass));
+        strcpy(student_info.password, testPass);
         fwrite(&student_info, sizeof(student_info), 1, stu_data);
         fclose(stu_data);
-        //welcome(student_info.username);
     }
-
+//welcome(student_info.username);
 }
+
 student_login()
 {
     printf("Student login");
 }
+
+
 
 
