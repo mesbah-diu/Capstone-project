@@ -13,7 +13,20 @@ void home();
 void marks_entry();
 void result();
 
-
+struct studentINFO
+{
+    char firstname[30];
+    char lastname[30];
+    char id[15];
+    char program[50];
+    char mail[20];
+    int contact;
+    char birthdateDate[30];
+    char presentAdd[60];
+    char permanentAdd[60];
+    char username[20];
+    char password[10];
+} student_info;
 
 FILE *stu_data, *student_result;
 
@@ -89,30 +102,18 @@ welcome()
 {
     system("cls");
     printf("\n\t\t\t\t\t\tYou are succefully login\n");
-    //home();
+    home();
 }
 
-/*home()
+home()
 {
     int choice=0;
     printf("\n\t\t\t\t\t\t What you want to do?\n");
-    printf("\n\t\t\t\t\t\t New Student Entry --> 1\n");
-    printf("\t\t\t\t\t\t Student Marks Entry --> 2\n");
-    printf("\t\t\t\t\t\t Check Result --> 3\n");
+    printf("\t\t\t\t\t\t Student Marks Entry --> 1\n");
+
     scanf("%d",&choice);
-    switch(choice)
-    {
-    case 1:
-        new_entry();
-        break;
-    case 2:
-        marks_entry();
-        break;
-    case 3:
-        result();
-        break;
-    }
-}*/
+    marks_entry();
+}
 
 marks_entry()
 {
@@ -123,26 +124,13 @@ marks_entry()
 student_signup()
 {
     system("cls");
-    struct studentINFO
-    {
-        char firstname[30];
-        char lastname[30];
-        char id[15];
-        char program[50];
-        char mail[20];
-        int contact;
-        char birthdateDate[30];
-        char presentAdd[60];
-        char permanentAdd[60];
-        char username[20];
-        char password[10];
-    } student_info;
+
     int index, check=0;
     char testUser[20], testPass[10], retype_pass[10];
 
 retry:
     printf("\n\n\t\t\t\tFill all the information to register you...\n");
-    stu_data=fopen("signup.bin","a");
+    stu_data=fopen("signup.txt","a");
 
     if(stu_data==NULL)
     {
@@ -185,8 +173,8 @@ retry:
     }
     if(check == 0)
         strcpy(student_info.username,testUser);
-    printf("\n\t\t\tPassword(**Must be 10 charecter**): ");
-    scanf("%s",&testUser);
+    printf("\n\t\t\tPassword(**Must be 5 charecter**): ");
+    scanf("%s",&testPass);
     printf("\n\t\t\tRetype Password: ");
     scanf("%s",&retype_pass);
     if(strcmp(testPass, retype_pass)==0)
@@ -195,14 +183,60 @@ retry:
         fwrite(&student_info, sizeof(student_info), 1, stu_data);
         fclose(stu_data);
     }
-//welcome(student_info.username);
+    printf("\n\t\t\t SignUp Completted");
+    main();
 }
 
 student_login()
 {
-    printf("Student login");
+    system("cls");
+    char usr_name[15],passw[10];
+    int count=0,stay=3,chc=0;
+
+again:
+    count++;
+    if(count==4)
+        exit(0);
+    stay--;
+
+    printf("\n\n\t\t\t\t\t\t\tUser Name:\n");
+    scanf("%s",&usr_name);
+
+    printf("\n\t\t\t\t\t\t\tPassword:\n");
+    scanf("%s",&passw);
+    stu_data=fopen("signup.txt","r");
+
+
+    while(fread(&student_info.username, sizeof(student_info.username), 1, stu_data)==1)
+    {
+        if(usr_name==student_info.username)
+            chc=0;
+    }
+    if(chc==0)
+    {
+        while(fread(&student_info.password, sizeof(student_info.password), 1, stu_data)==1)
+        {
+            if(passw==student_info.password)
+                printf("hello");
+        }
+        /* while(fread(&student_info.password, sizeof(student_info.password), 1, stu_data)==1)
+         {
+             if(passw==student_info.password)
+                 printf("hello");
+             else
+                 chc=0;
+         }
+        }
+        if(chc==0)
+        goto again;*/
+
+
+    }
+    fclose(stu_data);
 }
-
-
-
+result()
+{
+    system("cls");
+    printf("fuck");
+}
 
