@@ -12,6 +12,11 @@ void student_signup();
 void home();
 void marks_entry();
 void result();
+void laptop();
+void registered_course();
+void choice();
+void notice_add();
+void notice_board();
 
 struct studentINFO
 {
@@ -28,10 +33,11 @@ struct studentINFO
     char password[10];
 } student_info;
 
-FILE *stu_data, *student_result;
+FILE *stu_data, *stu_result, *notice;
 
 void main()
 {
+    system("cls");
     printf("\t\t\t\t\t ---------------Welcome---------------\n");
     printf("\n\t\t\t\t\t**********please Log In First**********\n");
     printf ("\n\t\t\t\t********************************************************");
@@ -107,18 +113,275 @@ welcome()
 
 home()
 {
-    int choice=0;
+    int choice;
+again:
     printf("\n\t\t\t\t\t\t What you want to do?\n");
     printf("\t\t\t\t\t\t Student Marks Entry --> 1\n");
+    printf("\t\t\t\t\t\t Notice Board Update --> 2\n");
 
     scanf("%d",&choice);
-    marks_entry();
+    switch(choice)
+    {
+    case 1:
+        marks_entry();
+        break;
+    case 2:
+        notice_add();
+        break;
+    default:
+        goto again;
+    }
+
 }
 
 marks_entry()
 {
     system("cls");
     printf("Here you can add marks of a student\n");
+    char id[15], o;
+    int semester;
+    float m1, m2, m3, m4, m5, wgpa, sgpa;
+    stu_result=fopen("result.txt","a");
+    if(stu_result=='/0')
+        printf("Error!!!\n");
+    else
+    {
+        fputs("ID No                Semester            Result\n", stu_result);
+        while(1)
+        {
+            printf("Enter student ID: ");
+            scanf("%s", id);
+            fwrite(&id, sizeof(id), 1, stu_result);
+            fprintf("\t\t\t", stu_result);
+            printf("Enter student semester: ");
+            scanf("%d",&semester);
+            fwrite(&semester, sizeof(semester),1, stu_result);
+            fprintf("\t\t\t", stu_result);
+            if(semester>=1 && semester<=11)
+            {
+                if(semester==1)
+                {
+                    printf("GPA of SE111: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SE112: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SE113: ");
+                    scanf("%f", &m3);
+                    printf("GPA of ENG 101: ");
+                    scanf("%f", &m4);
+                    printf("GPA of AOL 101: ");
+                    scanf("%f", &m5);
+                    wgpa=m1*3+m2+m3*3+m4*3+m5*3;
+                    sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa), 1, stu_result);
+                    fprintf("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==2)
+                {
+                    printf("GPA of SE121: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SE122: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SE123: ");
+                    scanf("%f", &m3);
+                    printf("GPA of MAT 101: ");
+                    scanf("%f", &m4);
+                    printf("GPA of PHY 101: ");
+                    scanf("%f", &m5);
+                    wgpa=m1*3+m2+m3*3+m4*3+m5*3;
+                    sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+                }
+                if(semester==3)
+                {
+                    printf("GPA of SE131: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SE132: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SE133: ");
+                    scanf("%f", &m3);
+                    printf("GPA of STA 101: ");
+                    scanf("%f", &m4);
+                    printf("GPA of MAT 102: ");
+                    scanf("%f", &m5);
+                    wgpa=m1*3+m2+m3*3+m4*3+m5*3;
+                    sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa), 1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==4)
+                {
+                    printf("GPA of SWE 132: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 213: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SWE 211: ");
+                    scanf("%f", &m3);
+                    wgpa=m1*4+m2*4+m3*4;
+                    sgpa=wgpa/12.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa), 1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==5)
+                {
+                    printf("GPA of SWE 233: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 222: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SWE 223: ");
+                    scanf("%f", &m3);
+                    printf("GPA of SWE 224: ");
+                    scanf("%f", &m4);
+                    wgpa=m1*4+m2*3+m3*4+m4*3;
+                    sgpa=wgpa/14.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==6)
+                {
+                    printf("GPA of SWE 131: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 232: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SWE 132: ");
+                    scanf("%f", &m3);
+                    printf("GPA of SWE 435: ");
+                    scanf("%f", &m4);
+                    wgpa=m1*3+m2*4+m3*3+m4*3;
+                    sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==7)
+                {
+                    printf("GPA of SWE 323: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 312: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SWE 322: ");
+                    scanf("%f", &m3);
+                    printf("GPA of SWE 313: ");
+                    scanf("%f", &m4);
+                    wgpa=m1*3+m2*3+m3*3+m4*4;
+                    sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==8)
+                {
+                    printf("GPA of SWE 321: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 333: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SWE 311: ");
+                    scanf("%f", &m3);
+                    printf("GPA of SWE 413: ");
+                    scanf("%f", &m4);
+                    wgpa=m1*4+m2*4+m3*3+m4*3;
+                    sgpa=wgpa/14.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==9)
+                {
+                    printf("GPA of SWE 412: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 331: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SWE 422: ");
+                    scanf("%f", &m3);
+                    printf("GPA of SWE 424: ");
+                    scanf("%f", &m4);
+                    wgpa=m1*3+m2*3+m3*4+m4*4;
+                    sgpa=wgpa/14.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==10)
+                {
+                    printf("GPA of SWE 423: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 425: ");
+                    scanf("%f", &m2);
+                    printf("GPA of SWE 426: ");
+                    scanf("%f", &m3);
+                    printf("GPA of SWE 332: ");
+                    scanf("%f", &m4);
+                    wgpa=m1*4+m2*4+m3*4+m4*3;
+                    sgpa=wgpa/15.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+                if(semester==11)
+                {
+                    printf("GPA of SWE 411: ");
+                    scanf("%f", &m1);
+                    printf("GPA of SWE 439: ");
+                    scanf("%f", &m2);
+                    wgpa=m1*4+m2*3;
+                    sgpa=wgpa/7.00;
+                    printf("Your SGPA is %.2f\n", sgpa);
+                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    fputs("\n", stu_result);
+                    fclose(stu_result);
+
+                }
+            }
+            else if (semester==12)
+                printf("\nContact your guide teacher please.");
+            else
+                printf("\nInvalid. Enter the correct one.");
+
+            printf("\n\nDo You Want to Exit? Press 'n' otherwise, hit the ENTER.\n");
+            char x=getch();
+            if(x=='n')
+                break;
+
+        }
+        printf("\nTo continue press 'y' to exit press'n'.");
+        scanf("%s", &o);
+        switch(o)
+        {
+        case 'y':
+            home();
+            break;
+        case 'n':
+            exit(0);
+            break;
+        default:
+            main();
+        }
+    }
 }
 
 student_signup()
@@ -191,52 +454,238 @@ student_login()
 {
     system("cls");
     char usr_name[15],passw[10];
-    int count=0,stay=3,chc=0;
-
-again:
-    count++;
-    if(count==4)
-        exit(0);
-    stay--;
-
-    printf("\n\n\t\t\t\t\t\t\tUser Name:\n");
+    int count=0,check=1;
+try_again:
+    printf("\n\n\t\t\t\t\t\t\tUser Name: ");
     scanf("%s",&usr_name);
 
-    printf("\n\t\t\t\t\t\t\tPassword:\n");
+    printf("\n\t\t\t\t\t\t\tPassword: ");
     scanf("%s",&passw);
     stu_data=fopen("signup.txt","r");
-
-
-    while(fread(&student_info.username, sizeof(student_info.username), 1, stu_data)==1)
+    if(stu_data==NULL)
+        printf("\n\t\t\tError!!! Failed to compare.\n");
+    else
     {
-        if(usr_name==student_info.username)
-            chc=0;
-    }
-    if(chc==0)
-    {
-        while(fread(&student_info.password, sizeof(student_info.password), 1, stu_data)==1)
+        while(fread(&student_info, sizeof(student_info), 1, stu_data)==1)
         {
-            if(passw==student_info.password)
-                printf("hello");
+            if(strcmp(usr_name,student_info.username)== 0 && strcmp(passw,student_info.password)== 0)
+            {
+                check=1;
+                fclose(stu_data);
+                choice();
+                break;
+            }
         }
-        /* while(fread(&student_info.password, sizeof(student_info.password), 1, stu_data)==1)
-         {
-             if(passw==student_info.password)
-                 printf("hello");
-             else
-                 chc=0;
-         }
-        }
-        if(chc==0)
-        goto again;*/
-
-
     }
-    fclose(stu_data);
+    if(check=0)
+    {
+        printf("Error log in, try again!!!\n");
+        ++count;
+        if(count==3)
+            exit(1);
+        goto try_again;
+    }
 }
+
+choice()
+{
+    system("cls");
+    printf("\t\t\t\t\t ----------------Welcome---------------\n");
+    printf("\n\t\t\t\t\t**********What You Want To Do**********\n");
+    printf ("\n\t\t\t\t********************************************************");
+    printf ("\n\t\t\t\t********************************************************\n\n\n");
+again:
+    printf("\t\t\tSee Result ------------> 1\n");
+    printf("\t\t\tLaptp Eligibility -----> 2\n");
+    printf("\t\t\tSee Registered Course -> 3\n");
+    int chc;
+    scanf("%d",&chc);
+    switch(chc)
+    {
+    case 1:
+        result();
+        break;
+    case 2:
+        laptop();
+        break;
+    case 3:
+        registered_course();
+        break;
+    default:
+        goto again;
+    }
+}
+
 result()
 {
     system("cls");
     printf("fuck");
+}
+
+notice_add()
+{
+    system("cls");
+    char c[1000];
+    printf("Enter New Notice\n");
+    notice=fopen("notice.txt","w");
+    gets(c);
+    fclose(notice);
+    home();
+}
+
+notice_board()
+{
+    system("cls");
+    char c[1000];
+    if ((notice = fopen("notice.txt", "r")) == NULL)
+    {
+        printf("Error! opening file");
+        exit(1);
+    }
+    fscanf(notice,"%[^\n]", c);
+    printf("\n\t\t\t\t\t\t Notice Board\n");
+    printf("\n%s",c);
+    fclose(notice);
+}
+
+laptop ()
+{
+    system ("cls");
+    int x;
+
+    printf ("\n\t\t\tWhich semester do you read now?\n\t\t\t");
+    scanf ("%d", &x);
+    if (x > 6)
+        printf ("\n\t\t\tYou have received your laptop. If not, contact your advisor or DIU Register office.");
+    else if (x == 6)
+        printf ("\n\t\t\tWelcome! You are eligible for the laptop campaign.");
+    else
+        printf ("\n\t\t\tSorry, you are not eligible for the laptop campaign.");
+
+    int o;
+    printf("\nTo continue press '1' to exit press'0'.");
+    scanf("%d",&o);
+    switch(o)
+    {
+    case 1:
+        choice();
+        break;
+    case 0:
+        exit(0);
+        break;
+    default:
+        main();
+    }
+}
+
+registered_course()
+{
+    system("cls");
+
+    int x;
+    printf ("\t\t\t\tEnter your semester: ");
+    scanf ("%d", &x);
+    printf ("Course Code\t\tCourse Title\t\t\tCourse Credit\n");
+    if (x >= 1 && x <= 11)
+    {
+        if (x == 1)
+        {
+            printf ("SE111\t\tComputer Fundamentals\t\t\t3\n");
+            printf ("SE113\t\tIntroduction to Software Engineering\t\t\t3\n");
+            printf ("SE112\t\tComputer Fundamentals Lab\t\t\t1\n");
+            printf ("ENG 101\t\tEnglish I\t\t\t3\n");
+            printf ("AOL 101\t\tArt of Living\t\t\t3\n");
+        }
+        else if (x == 2)
+        {
+            printf ("SE122\t\tStructured Programming Lab\t\t\t1\n");
+            printf ("SE123\t\tDiscrete Mathematics\t\t\t3\n");
+            printf ("SE121\t\tStructured Programming\t\t\t3\n");
+            printf ("MAT 101\t\tMathematics I\t\t\t3\n");
+            printf ("PHY 101\t\tPhysics I\t\t\t3\n");
+        }
+        else if (x == 3)
+        {
+            printf ("SE131\t\tData Structure\t\t\t3\n");
+            printf ("SE132\t\tData Structure Lab\t\t\t1\n");
+            printf("SE133\t\tSoftware Development Capstone Project\t\t\t3\n");
+            printf ("STA101\t\tStatistics I\t\t\t3\n");
+            printf ("MAT102\t\tMathematics II\t\t\t3\n");
+
+        }
+        else if (x == 4)
+        {
+            printf ("SWE 132\t\tJava Programming With Lab\t\t\t4\n");
+            printf ("SWE 213\t\tComputer Algorithm With Lab\t\t\t4\n");
+            printf ("SWE 211\t\tIntroduction to Database With Lab\t\t\t4\n");
+        }
+        else if (x == 5)
+        {
+            printf ("SWE 233\t\tObject Oriented Concept & Design With Lab\t\t\t4\n");
+            printf ("SWE 222\t\tSoftware Engineering Assurance & Testing\t\t\t3\n");
+            printf ("SWE 223\t\tDigital Electronics With Lab\t\t\t4\n");
+            printf ("SWE 224\t\tDiscrete Mathematics\t\t\t3\n");
+        }
+        else if (x == 6)
+        {
+            printf("SWE 131\t\tDocumentation of Software Engineering\t\t\t3\n");
+            printf ("SWE 232\t\tOperating System With Lab\t\t\t4\n");
+            printf ("SWE 132\t\tSoftware Project Management\t\t\t3\n");
+            printf ("SWE 435\t\tBussiness Communication\t\t\t3\n");
+
+        }
+        else if (x == 7)
+        {
+            printf ("SWE 323\t\tSystem Analysis and Design\t\t\t3\n");
+            printf ("SWE 312\t\tTheory of Computing\t\t\t3\n");
+            printf ("SWE 322\t\tSoftware Security\t\t\t3\n");
+            printf ("SWE 313\t\t.Net Programming With Lab\t\t\t4\n");
+        }
+        else if (x == 8)
+        {
+            printf ("SWE 321\t\tData Communication With Lab\t\t\t4\n");
+            printf ("SWE 333\t\tDesktop and Web Programming With Lab\t\t\t4\n");
+            printf ("SWE 311\t\tComputer Architecture & Organization\t\t\t3\n");
+            printf ("SWE 413\t\tSoftware Engineering & Cyber Laws\t\t\t3\n");
+        }
+        else if (x == 9)
+        {
+            printf ("SWE 412\t\tManagement Information System\t\t\t3\n");
+            printf ("SWE 331\t\tObject Oriented Software Development\t\t\t3\n");
+            printf ("SWE 422\t\tNumerical Analysis With Lab\t\t\t4\n");
+            printf ("SWE 424\t\tArtificial Intelligence With Lab\t\t\t4\n");
+        }
+        else if (x == 10)
+        {
+            printf ("SWE 423\t\tAdvance Database Management System With Lab\t\t\t4\n");
+            printf ("SWE 425\t\tTelecommunication Engineering With Lab\t\t\t4\n");
+            printf ("SWE 426\t\tDistrubutive Computing and Network Security With Lab\t\t\t4\n");
+            printf ("SWE 332\t\tSoftware Engineering Project II (Web Programming)\t\t\t3\n");
+        }
+        else if (x == 11)
+        {
+            printf ("SWE 411\t\tComputer Networking With Lab\t\t\t4\n");
+            printf ("SWE 439\t\tProject / Thesis\t\t\t3\n");
+        }
+    }
+    else
+    {
+        printf ("Wrong option. Choice a correct one among 1 to 11.\n");
+    }
+
+    int o;
+    printf("\nTo continue press '1' to exit press'0'.");
+    scanf("%d", &o);
+    switch(o)
+    {
+    case 1:
+        choice();
+        break;
+    case 0:
+        exit(0);
+        break;
+    default:
+        main();
+    }
 }
 
