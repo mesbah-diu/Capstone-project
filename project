@@ -5,7 +5,6 @@
 #define Admin "mesbah"
 #define Password "12345"
 
-void welcome();
 void admin_login();
 void student_login();
 void student_signup();
@@ -87,7 +86,7 @@ again:
     {
         if(strcmp(pass,Password)==0)
         {
-            welcome();
+            home();
         }
         else
         {
@@ -104,20 +103,14 @@ again:
     }
 }
 
-welcome()
-{
-    system("cls");
-    printf("\n\t\t\t\t\t\tYou are succefully login\n");
-    home();
-}
-
 home()
 {
+    system("cls");
     int choice;
 again:
     printf("\n\t\t\t\t\t\t What you want to do?\n");
-    printf("\t\t\t\t\t\t Student Marks Entry --> 1\n");
-    printf("\t\t\t\t\t\t Notice Board Update --> 2\n");
+    printf("\n\t\t\t\t\t\tStudent Marks Entry --> 1\n");
+    printf("\n\t\t\t\t\t\tNotice Board Update --> 2\n");
 
     scanf("%d",&choice);
     switch(choice)
@@ -456,10 +449,10 @@ student_login()
     char usr_name[15],passw[10];
     int count=0,check=1;
 try_again:
-    printf("\n\n\t\t\t\t\t\t\tUser Name: ");
+    printf("\n\n\t\t\t\t\t\tUser Name: ");
     scanf("%s",&usr_name);
 
-    printf("\n\t\t\t\t\t\t\tPassword: ");
+    printf("\n\t\t\t\t\t\tPassword: ");
     scanf("%s",&passw);
     stu_data=fopen("signup.txt","r");
     if(stu_data==NULL)
@@ -496,8 +489,9 @@ choice()
     printf ("\n\t\t\t\t********************************************************\n\n\n");
 again:
     printf("\t\t\tSee Result ------------> 1\n");
-    printf("\t\t\tLaptp Eligibility -----> 2\n");
-    printf("\t\t\tSee Registered Course -> 3\n");
+    printf("\n\t\t\tLaptp Eligibility -----> 2\n");
+    printf("\n\t\t\tSee Registered Course -> 3\n");
+    printf("\n\t\t\tSee Notice Board ------> 4\n");
     int chc;
     scanf("%d",&chc);
     switch(chc)
@@ -511,6 +505,9 @@ again:
     case 3:
         registered_course();
         break;
+    case 4:
+        notice_board();
+        break;
     default:
         goto again;
     }
@@ -522,17 +519,21 @@ result()
     printf("fuck");
 }
 
-notice_add()
+/*notice_add()
 {
-    system("cls");
-    char c[1000];
-    printf("Enter New Notice\n");
+    char str[50];
     notice=fopen("notice.txt","w");
-    gets(c);
+    if(notice==NULL)
+    {
+        printf("Error!Problem in opening file\n");
+        exit(0);
+    }
+    while(strlen(gets(str>0)))
+    {
+        fputs(str,notice);
+    }
     fclose(notice);
-    home();
-}
-
+}*/
 notice_board()
 {
     system("cls");
@@ -542,10 +543,24 @@ notice_board()
         printf("Error! opening file");
         exit(1);
     }
-    fscanf(notice,"%[^\n]", c);
+    fscanf(notice,"%s", c);
     printf("\n\t\t\t\t\t\t Notice Board\n");
     printf("\n%s",c);
     fclose(notice);
+    int o;
+    printf("\nTo continue press '1' to exit press'0'.");
+    scanf("%d",&o);
+    switch(o)
+    {
+    case 1:
+        choice();
+        break;
+    case 0:
+        exit(0);
+        break;
+    default:
+        main();
+    }
 }
 
 laptop ()
@@ -688,4 +703,3 @@ registered_course()
         main();
     }
 }
-
