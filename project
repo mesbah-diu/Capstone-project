@@ -14,7 +14,7 @@ void result();
 void laptop();
 void registered_course();
 void choice();
-void notice_add();
+//void notice_add();
 void notice_board();
 
 struct studentINFO
@@ -31,6 +31,13 @@ struct studentINFO
     char username[20];
     char password[10];
 } student_info;
+
+struct stresult
+{
+    char id[10];
+    int sem;
+    float m1,m2,m3,m4,m5,sgpa;
+} rslt;
 
 FILE *stu_data, *stu_result, *notice;
 
@@ -118,9 +125,9 @@ again:
     case 1:
         marks_entry();
         break;
-    case 2:
-        notice_add();
-        break;
+    /* case 2:
+         notice_add();
+         break;*/
     default:
         goto again;
     }
@@ -131,9 +138,11 @@ marks_entry()
 {
     system("cls");
     printf("Here you can add marks of a student\n");
-    char id[15], o;
-    int semester;
-    float m1, m2, m3, m4, m5, wgpa, sgpa;
+    //char id[15],
+    char o;
+    //int semester;
+    //float m1, m2, m3, m4, m5, wgpa, sgpa;
+    float wgpa;
     stu_result=fopen("result.txt","a");
     if(stu_result=='/0')
         printf("Error!!!\n");
@@ -143,214 +152,261 @@ marks_entry()
         while(1)
         {
             printf("Enter student ID: ");
-            scanf("%s", id);
-            fwrite(&id, sizeof(id), 1, stu_result);
-            fprintf("\t\t\t", stu_result);
+            scanf("%s", rslt.id);
+            //fputs(rslt.id,stu_result);
+            fwrite(&rslt.id, sizeof(rslt.id),1, stu_result);
+            //fprintf("\t\t\t", stu_result);
             printf("Enter student semester: ");
-            scanf("%d",&semester);
-            fwrite(&semester, sizeof(semester),1, stu_result);
-            fprintf("\t\t\t", stu_result);
-            if(semester>=1 && semester<=11)
+            getch();
+            scanf("%d",&rslt.sem);
+            fwrite(&rslt.sem, sizeof(rslt.sem),1, stu_result);
+            //fprintf("\t\t\t", stu_result);
+            if(rslt.sem>=1 && rslt.sem<=11)
             {
-                if(semester==1)
+                if(rslt.sem==1)
                 {
                     printf("GPA of SE111: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    //fputs(rslt.m1,stu_result);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SE112: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SE113: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of ENG 101: ");
-                    scanf("%f", &m4);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
                     printf("GPA of AOL 101: ");
-                    scanf("%f", &m5);
-                    wgpa=m1*3+m2+m3*3+m4*3+m5*3;
-                    sgpa=wgpa/13.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa), 1, stu_result);
-                    fprintf("\n", stu_result);
+                    scanf("%f", &rslt.m5);
+                    fwrite(&rslt.m5, sizeof(rslt.m5),1, stu_result);
+                    wgpa=rslt.m1*3+rslt.m2+rslt.m3*3+rslt.m4*3+rslt.m5*3;
+                    rslt.sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa), 1, stu_result);
+                    //fprintf("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==2)
+                if(rslt.sem==2)
                 {
                     printf("GPA of SE121: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SE122: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SE123: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of MAT 101: ");
-                    scanf("%f", &m4);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
                     printf("GPA of PHY 101: ");
-                    scanf("%f", &m5);
-                    wgpa=m1*3+m2+m3*3+m4*3+m5*3;
-                    sgpa=wgpa/13.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m5);
+                    fwrite(&rslt.m5, sizeof(rslt.m5),1, stu_result);
+                    wgpa=rslt.m1*3+rslt.m2+rslt.m3*3+rslt.m4*3+rslt.m5*3;
+                    rslt.sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
                 }
-                if(semester==3)
+                if(rslt.sem==3)
                 {
                     printf("GPA of SE131: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SE132: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SE133: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of STA 101: ");
-                    scanf("%f", &m4);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
                     printf("GPA of MAT 102: ");
-                    scanf("%f", &m5);
-                    wgpa=m1*3+m2+m3*3+m4*3+m5*3;
-                    sgpa=wgpa/13.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa), 1, stu_result);
+                    scanf("%f", &rslt.m5);
+                    fwrite(&rslt.m5, sizeof(rslt.m5),1, stu_result);
+                    wgpa=rslt.m1*3+rslt.m2+rslt.m3*3+rslt.m4*3+rslt.m5*3;
+                    rslt.sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa), 1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==4)
+                if(rslt.sem==4)
                 {
                     printf("GPA of SWE 132: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 213: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SWE 211: ");
-                    scanf("%f", &m3);
-                    wgpa=m1*4+m2*4+m3*4;
-                    sgpa=wgpa/12.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa), 1, stu_result);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
+                    wgpa=rslt.m1*4+rslt.m2*4+rslt.m3*4;
+                    rslt.sgpa=wgpa/12.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa), 1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==5)
+                if(rslt.sem==5)
                 {
                     printf("GPA of SWE 233: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 222: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SWE 223: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of SWE 224: ");
-                    scanf("%f", &m4);
-                    wgpa=m1*4+m2*3+m3*4+m4*3;
-                    sgpa=wgpa/14.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
+                    wgpa=rslt.m1*4+rslt.m2*3+rslt.m3*4+rslt.m4*3;
+                    rslt.sgpa=wgpa/14.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==6)
+                if(rslt.sem==6)
                 {
                     printf("GPA of SWE 131: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 232: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SWE 132: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of SWE 435: ");
-                    scanf("%f", &m4);
-                    wgpa=m1*3+m2*4+m3*3+m4*3;
-                    sgpa=wgpa/13.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
+                    wgpa=rslt.m1*3+rslt.m2*4+rslt.m3*3+rslt.m4*3;
+                    rslt.sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==7)
+                if(rslt.sem==7)
                 {
                     printf("GPA of SWE 323: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 312: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SWE 322: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of SWE 313: ");
-                    scanf("%f", &m4);
-                    wgpa=m1*3+m2*3+m3*3+m4*4;
-                    sgpa=wgpa/13.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
+                    wgpa=rslt.m1*3+rslt.m2*3+rslt.m3*3+rslt.m4*4;
+                    rslt.sgpa=wgpa/13.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==8)
+                if(rslt.sem==8)
                 {
                     printf("GPA of SWE 321: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 333: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SWE 311: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of SWE 413: ");
-                    scanf("%f", &m4);
-                    wgpa=m1*4+m2*4+m3*3+m4*3;
-                    sgpa=wgpa/14.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
+                    wgpa=rslt.m1*4+rslt.m2*4+rslt.m3*3+rslt.m4*3;
+                    rslt.sgpa=wgpa/14.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==9)
+                if(rslt.sem==9)
                 {
                     printf("GPA of SWE 412: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 331: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SWE 422: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of SWE 424: ");
-                    scanf("%f", &m4);
-                    wgpa=m1*3+m2*3+m3*4+m4*4;
-                    sgpa=wgpa/14.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
+                    wgpa=rslt.m1*3+rslt.m2*3+rslt.m3*4+rslt.m4*4;
+                    rslt.sgpa=wgpa/14.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==10)
+                if(rslt.sem==10)
                 {
                     printf("GPA of SWE 423: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 425: ");
-                    scanf("%f", &m2);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
                     printf("GPA of SWE 426: ");
-                    scanf("%f", &m3);
+                    scanf("%f", &rslt.m3);
+                    fwrite(&rslt.m3, sizeof(rslt.m3),1, stu_result);
                     printf("GPA of SWE 332: ");
-                    scanf("%f", &m4);
-                    wgpa=m1*4+m2*4+m3*4+m4*3;
-                    sgpa=wgpa/15.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m4);
+                    fwrite(&rslt.m4, sizeof(rslt.m4),1, stu_result);
+                    wgpa=rslt.m1*4+rslt.m2*4+rslt.m3*4+rslt.m4*3;
+                    rslt.sgpa=wgpa/15.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
-                if(semester==11)
+                if(rslt.sem==11)
                 {
                     printf("GPA of SWE 411: ");
-                    scanf("%f", &m1);
+                    scanf("%f", &rslt.m1);
+                    fwrite(&rslt.m1, sizeof(rslt.m1),1, stu_result);
                     printf("GPA of SWE 439: ");
-                    scanf("%f", &m2);
-                    wgpa=m1*4+m2*3;
-                    sgpa=wgpa/7.00;
-                    printf("Your SGPA is %.2f\n", sgpa);
-                    fwrite(&sgpa, sizeof(sgpa),1, stu_result);
+                    scanf("%f", &rslt.m2);
+                    fwrite(&rslt.m2, sizeof(rslt.m2),1, stu_result);
+                    wgpa=rslt.m1*4+rslt.m2*3;
+                    rslt.sgpa=wgpa/7.00;
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fwrite(&rslt.sgpa, sizeof(rslt.sgpa),1, stu_result);
                     fputs("\n", stu_result);
                     fclose(stu_result);
 
                 }
             }
-            else if (semester==12)
+            else if (rslt.sem==12)
                 printf("\nContact your guide teacher please.");
             else
                 printf("\nInvalid. Enter the correct one.");
@@ -516,23 +572,196 @@ again:
 result()
 {
     system("cls");
-    printf("fuck");
+    printf("\nEnter Your Student ID:");
+    char id[15];
+    char semester;
+    scanf("%s",&id);
+    printf("Which Semester Result You Want To Know:\n");
+    scanf("%s",&semester);
+    stu_result=fopen("result.txt","r");
+    if(stu_result==NULL)
+        printf("\n\t\t\tError!!! Result not fount.\n");
+    else
+    {
+        while(fread(&rslt, sizeof(rslt), 1, stu_result)==1)
+        {
+            if(strcmp(id,rslt.id)== 0&& strcmp(semester,rslt.sem)==0)
+            {
+
+                if(rslt.sem==1)
+                {
+                    printf("GPA of SE111: ");
+                    printf("%.2f",rslt.m1);
+                    printf("GPA of SE112: ");
+                    printf("%.2f",rslt.m2);
+                    printf("GPA of SE113: ");
+                    printf("%.2f",rslt.m3);
+                    printf("GPA of ENG 101: ");
+                    printf("%.2f",rslt.m4);
+                    printf("GPA of AOL 101: ");
+                    printf("%.2f",rslt.m5);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                /*if(rslt.sem==2)
+                {
+                    printf("GPA of SE121: ");
+                    puts(rslt.m1);
+                    printf("GPA of SE122: ");
+                    puts(rslt.m2);
+                    printf("GPA of SE123: ");
+                    puts(rslt.m3);
+                    printf("GPA of MAT 101: ");
+                    puts(rslt.m4);
+                    printf("GPA of PHY 101: ");
+                    puts(rslt.m5);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+                }
+                if(rslt.sem==3)
+                {
+                    printf("GPA of SE131: ");
+                    puts(rslt.m1);
+                    printf("GPA of SE132: ");
+                    puts(rslt.m2);
+                    printf("GPA of SE133: ");
+                    puts(rslt.m3);
+                    printf("GPA of STA 101: ");
+                    puts(rslt.m4);
+                    printf("GPA of MAT 102: ");
+                    puts(rslt.m5);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==4)
+                {
+                    printf("GPA of SWE 132: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 213: ");
+                    puts(rslt.m2);
+                    printf("GPA of SWE 211: ");
+                    puts(rslt.m3);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==5)
+                {
+                    printf("GPA of SWE 233: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 222: ");
+                    puts(rslt.m2);
+                    printf("GPA of SWE 223: ");
+                    puts(rslt.m3);
+                    printf("GPA of SWE 224: ");
+                    puts(rslt.m4);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==6)
+                {
+                    printf("GPA of SWE 131: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 232: ");
+                    puts(rslt.m2);
+                    printf("GPA of SWE 132: ");
+                    puts(rslt.m3);
+                    printf("GPA of SWE 435: ");
+                    puts(rslt.m4);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==7)
+                {
+                    printf("GPA of SWE 323: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 312: ");
+                    puts(rslt.m2);
+                    printf("GPA of SWE 322: ");
+                    puts(rslt.m3);
+                    printf("GPA of SWE 313: ");
+                    puts(rslt.m4);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==8)
+                {
+                    printf("GPA of SWE 321: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 333: ");
+                    puts(rslt.m2);
+                    printf("GPA of SWE 311: ");
+                    puts(rslt.m3);
+                    printf("GPA of SWE 413: ");
+                    puts(rslt.m4);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==9)
+                {
+                    printf("GPA of SWE 412: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 331: ");
+                    puts(rslt.m2);
+                    printf("GPA of SWE 422: ");
+                    puts(rslt.m3);
+                    printf("GPA of SWE 424: ");
+                    puts(rslt.m4);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==10)
+                {
+                    printf("GPA of SWE 423: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 425: ");
+                    puts(rslt.m2);
+                    printf("GPA of SWE 426: ");
+                    puts(rslt.m3);
+                    printf("GPA of SWE 332: ");
+                    puts(rslt.m4);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }
+                if(rslt.sem==11)
+                {
+                    printf("GPA of SWE 411: ");
+                    puts(rslt.m1);
+                    printf("GPA of SWE 439: ");
+                    puts(rslt.m1);
+                    printf("Your SGPA is %.2f\n", rslt.sgpa);
+                    fclose(stu_result);
+
+                }*/
+            }
+        }
+    }
+    //home();
 }
 
 /*notice_add()
 {
     char str[50];
+    fflash(str);
     notice=fopen("notice.txt","w");
     if(notice==NULL)
     {
         printf("Error!Problem in opening file\n");
         exit(0);
     }
-    while(strlen(gets(str>0)))
-    {
+    gets(str);
         fputs(str,notice);
-    }
+
     fclose(notice);
+    home();
 }*/
 notice_board()
 {
