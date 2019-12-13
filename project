@@ -161,6 +161,8 @@ marks_entry()
         fflush(stdin);
         printf("ID: ");
         gets(stu.ID);
+        printf("Enter Semester");
+        scanf("%d",&stu.name);
 
         if(stu.name==1)
         {
@@ -205,7 +207,7 @@ result()
     fflush(stdin);
     gets(s_id);
     FILE *fp;
-    fp = fopen("record.txt","rb");
+    fp = fopen("record.txt","r");
     while(fread(&stu,sizeof(stu),1,fp) == 1)
     {
         if(strcmp(s_id,stu.ID) == 0)
